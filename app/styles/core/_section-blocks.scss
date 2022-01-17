@@ -1,0 +1,38 @@
+@use '../utility/mixins/media-query';
+@use '../utility/variables/spacing';
+@use 'sass:meta';
+@use 'sass:list';
+@use 'sass:map';
+
+.section-block {
+	@each $size in map.get(spacing.$sectionBlocks, 'default') {
+		$index: list.index(map.get(spacing.$sectionBlocks, 'default'), $size);
+
+		@if $index == 1 {
+			padding-block: var(--section-padding, #{$size});
+		} @else {
+			@include media-query.up(md) {
+				--section-padding: #{$size};
+			}
+		}
+	}
+}
+@if meta.global-variable-exists(sectionBlocks, $module: 'spacing') {
+	@each $name, $sizes in spacing.$sectionBlocks {
+		@if $name != 'default' {
+			.block-#{$name} {
+				--section-padding: #{list.nth($sizes, 1)};
+				@if list.length($sizes) > 1 {
+					@include media-query.up(md) {
+						--section-padding: #{list.nth($sizes, 2)}
+					}
+				}
+				@if list.length($sizes) > 2 {
+					@include media-query.up(lg) {
+						--section-padding: #{list.nth($sizes, 3)}
+					}
+				}
+			}
+		}
+	}
+}

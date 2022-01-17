@@ -1,0 +1,18 @@
+@use '../utility/functions/infix';
+@use '../utility/mixins/media-query';
+@use '../utility/variables/breakpoints';
+@use 'sass:map';
+
+@each $bp in map.keys(breakpoints.$sizes) {
+	$infix: infix.breakpoint($bp, breakpoints.$sizes);
+	.hide#{$infix}-up {
+		@include media-query.up($bp) {
+			display: none !important;
+		}
+	}
+	.hide#{$infix}-down {
+		@include media-query.down($bp) {
+			display: none !important;
+		}
+	}
+}

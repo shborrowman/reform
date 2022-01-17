@@ -1,0 +1,71 @@
+@use '../utility/mixins/media-query';
+@use 'sass:math';
+
+.hero {
+	color: var(--color-white);
+	overflow: hidden;
+	position: relative;
+	&::before {
+		animation: 600ms ease-in-out forwards background;
+		background-color: var(--color-orange);
+		content: '';
+		inset: 0 0 10rem;
+		position: absolute;
+		transform: translateX(-100%);
+		z-index: -1;
+		@include media-query.up(md) {
+			bottom: 20rem;
+		}
+	}
+	&-row {
+		display: flex;
+		justify-content: space-between;
+	}
+	&-copy {
+		display: flex;
+		flex-direction: column;
+		@include media-query.up(md) {
+			width: 59%;
+		}
+		.slide-down {
+			animation: 400ms ease-in-out 800ms forwards animateDown;
+			opacity: 0;
+			transform: translateY(-50%);
+		}
+		img {
+			animation: 400ms ease-in-out 800ms forwards animateRight;
+			margin-block-start: auto;
+			opacity: 0;
+			transform: translateX(-100%);
+		}
+	}
+	&-image {
+		animation: 400ms ease-in-out 800ms forwards animateLeft;
+		opacity: 0;
+		transform: translateX(100%);
+		width: 24%;
+	}
+}
+@keyframes background {
+	to {
+		transform: translateX(0);
+	}
+}
+@keyframes animateRight {
+	to {
+		opacity: 1;
+		transform: translateX(-10%);
+	}
+}
+@keyframes animateLeft {
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+@keyframes animateDown {
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}

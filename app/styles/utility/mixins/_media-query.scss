@@ -1,0 +1,53 @@
+@use '../variables/breakpoints' as *;
+
+// Media Queries
+@function breakpoint-next($name, $breakpoints: $sizes, $breakpoint-names: map-keys($breakpoints)) {
+	$n: index($breakpoint-names, $name);
+	@return if($n < length($breakpoint-names), nth($breakpoint-names, $n + 1), null);
+}
+
+@function breakpoint-min($name, $breakpoints: $sizes) {
+	$min: map-get($breakpoints, $name);
+	@return if($min != 0, $min, null);
+}
+
+@function breakpoint-max($name, $breakpoints: $sizes) {
+	$next: breakpoint-next($name, $breakpoints);
+	@return if($next, breakpoint-min($next, $breakpoints) - 1px, null);
+}
+
+@mixin up($name, $breakpoints: $sizes) {
+	$min: breakpoint-min($name, $breakpoints);
+	@if $min {
+		@media (min-width: $min) {
+			@content;
+		}
+	} @else {
+		@content;
+	}
+}
+
+@mixin down($name, $breakpoints: $sizes) {
+	$max: breakpoint-max($name, $breakpoints);
+	@if $max {
+		@media (max-width: $max) {
+			@content;
+		}
+	} @else {
+		@content;
+	}
+}
+
+@mixin between($lower, $upper, $breakpoints: $sizes) {
+	@include up($lower, $breakpoints) {
+		@include down($upper, $breakpoints) {
+			@content;
+		}
+	}
+}
+
+@mixin only($name, $breakpoints: $sizes) {
+	@include between($name, $name, $breakpoints) {
+		@content;
+	}
+}

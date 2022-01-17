@@ -1,0 +1,34 @@
+// Spacing
+$default: 1rem;
+$xs: $default * .25;
+$sm: $default * .5;
+$md: $default * 1.5;
+$lg: $default * 2;
+$xl: $default * 3;
+
+$sizes: (
+	'xs': $xs,
+	'sm': $sm,
+	'default': $default,
+	'md': $md,
+	'lg': $lg,
+	'xl': $xl
+);
+
+// Padding for wrapper
+$gutterWidth: $lg * 2;
+
+// Spacing for multiple paragraphs
+$paragraph: $sm;
+
+// Spacing for section blocks
+// These can be used as either a single value
+// Or with multiple values for mobile and browser spacing
+// Example .section-block-sm, .section-block-lg, ect.
+// Note: default does not get added to the end and will be .section-block
+$sectionBlocks: (
+	sm: $md,
+	default: (5rem, 10rem),
+	lg: ($default * 6, $default * 8)
+);
+

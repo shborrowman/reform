@@ -1,0 +1,7 @@
+@use '../utility/mixins/make-columns';
+@use '../utility/variables/spacing';
+@use 'sass:meta';
+
+@if meta.global-variable-exists(max, $module: 'spacing') {
+	@include make-columns.build();
+}

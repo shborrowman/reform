@@ -1,0 +1,23 @@
+// Main Colors
+$white: #fff;
+$black: #000;
+$orange: #fbc843;
+$blue: #414A69;
+$gray: #f5f5f7;
+
+// Default Colors
+$text: $black;
+$link: $blue;
+
+$colors: (
+	'white': $white,
+	'black': $black,
+	'orange': $orange,
+	'gray': $gray
+);
+
+$theme: (
+	'default': $black,
+	'link': $blue
+)
+

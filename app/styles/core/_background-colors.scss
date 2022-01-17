@@ -1,0 +1,11 @@
+@use '../utility/variables/colors';
+@use 'sass:meta';
+@use 'sass:map';
+
+@if meta.global-variable-exists(backgroundColors, $module: 'colors') {
+	@each $name in map.keys(colors.$backgroundColors) {
+		.background-#{$name} {
+			background-color: var(--color-background-#{$name});
+		}
+	}
+}

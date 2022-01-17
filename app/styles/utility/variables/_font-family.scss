@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+// Font family
+$fallbackFonts: sans-serif;
+$bebas: 'Bebas Neue';
+$default: $bebas, $fallbackFonts;
+
+$fonts: (
+	'default': #{$default}
+)

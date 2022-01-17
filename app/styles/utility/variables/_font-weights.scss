@@ -1,0 +1,16 @@
+// Basic font weights
+$thin: 100;
+$light: 300;
+$regular: 400;
+$medium: 600;
+$bold: 700;
+$black: 900;
+
+$sizes: (
+	'thin': $thin,
+	'light': $light,
+	'regular': $regular,
+	'medium': $medium,
+	'bold': $bold,
+	'black': $black
+);

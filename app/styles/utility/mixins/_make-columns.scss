@@ -1,0 +1,79 @@
+@use './media-query';
+@use '../functions/infix';
+@use '../variables/spacing';
+@use '../variables/breakpoints';
+@use 'sass:meta';
+@use 'sass:map';
+@use 'sass:math';
+
+@mixin make-col($size, $columns: spacing.$max) {
+	--column-size: #{math.percentage(math.div($size, $columns))};
+}
+
+@mixin make-col-offset($size, $columns: spacing.$max) {
+	$num: math.div($size, $columns);
+	margin-left: if($num == 0, 0, math.percentage($num));
+}
+
+@mixin build($columns: spacing.$max, $breakpoints: breakpoints.$sizes) {
+	.column {
+		width: var(--column-size, 100%);
+		padding-inline: calc(var(--row-gap) * .5);
+
+		.flex-children > & {
+			display: flex;
+		}
+		
+		&-box {
+			width: 100%;
+		}
+	}
+	@each $breakpoint in map-keys($breakpoints) {
+		$infix: infix.breakpoint($breakpoint, $breakpoints);
+
+		@include media-query.up($breakpoint, $breakpoints) {
+			.col#{$infix} {
+				flex: {
+					basis: 0;
+					grow: 1;
+				}
+			}
+			.col#{$infix}-auto {
+				flex: 0 0 auto;
+				width: auto;
+			}
+
+			@for $i from 1 through $columns {
+				.col#{$infix}-#{$i} {
+					@include make-col($i, $columns);
+				}
+			}
+
+			@for $i from 0 through ($columns - 1) {
+				@if not ($infix == "" and $i == 0) {
+					.offset#{$infix}-#{$i} {
+						@include make-col-offset($i, $columns);
+					}
+				}
+			}
+
+			.order#{$infix}-first { 
+				order: -1;
+			}
+
+			.order#{$infix}-last {
+				order: $columns + 1;
+			}
+
+			@for $i from 0 through $columns {
+				.order#{$infix}-#{$i} {
+					order: $i;
+				}
+			}
+
+			.offset-left#{$infix}-auto {
+				margin-left: auto;
+			}
+		}
+	}
+}

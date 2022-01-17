@@ -1,0 +1,35 @@
+@use '../utility/mixins/media-query';
+@use '../utility/variables/max-width';
+@use '../utility/variables/spacing';
+@use 'sass:meta';
+@use 'sass:list';
+
+.container {
+	margin-inline: auto;
+	max-width: min(calc(100vw - var(--container-padding, #{spacing.$gutterWidth})), var(--max-width, #{max-width.$max-width}));
+}
+@if meta.global-variable-exists(multiple, $module: 'max-width') {
+	@each $size, $max-width in max-width.$multiple {
+		.width-#{$size} {
+			--max-width: #{$max-width};
+		}
+	}
+}
+
+@if meta.global-variable-exists(multiple-gaps, $module: 'spacing') {
+	@each $size, $gap in spacing.$multiple-gaps {
+		.size-#{$size} {
+			--container-padding: #{list.nth($gap, 1)};
+			@if list.length($gap) > 1 {
+				@include media-query.up(md) {
+					--container-padding: #{list.nth($gap, 2)}
+				}
+			}
+			@if list.length($gap) > 2 {
+				@include media-query.up(lg) {
+					--container-padding: #{list.nth($gap, 3)}
+				}
+			}
+		}
+	}
+}

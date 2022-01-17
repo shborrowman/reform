@@ -1,0 +1,31 @@
+@use '../utility/variables/font-family';
+@use '../utility/variables/font-sizes';
+@use '../utility/variables/font-weights';
+@use '../utility/variables/colors';
+@use '../utility/variables/spacing';
+
+:root {
+	@each $font, $value in font-family.$fonts {
+		--font-family-#{$font}: #{$value};
+	}
+
+	@each $weight, $value in font-weights.$sizes {
+		--font-weight-#{$weight}: #{$value};
+	}
+
+	@each $size, $value in font-sizes.$copy {
+		--font-size-#{$size}: #{$value};
+	}
+	
+	@each $color, $value in colors.$colors {
+		--color-#{$color}: #{$value};
+	}
+
+	@each $color, $value in colors.$theme {
+		--color-#{$color}: #{$value};
+	}
+
+	@each $size, $value in spacing.$sizes {
+		--spacing-#{$size}: #{$value};
+	}
+}

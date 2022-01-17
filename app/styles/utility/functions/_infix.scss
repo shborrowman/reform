@@ -1,0 +1,11 @@
+@use '../variables/breakpoints';
+@use 'sass:map';
+
+@function breakpoint-min($name, $breakpoints: breakpoints.$sizes) {
+	$min: map.get($breakpoints, $name);
+	@return if($min != 0, $min, null);
+}
+
+@function breakpoint($name, $breakpoints: breakpoints.$sizes) {
+	@return if(breakpoint-min($name, $breakpoints) == null, "", "-#{$name}");
+}

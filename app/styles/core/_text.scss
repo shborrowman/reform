@@ -1,0 +1,43 @@
+@use '../utility/mixins/media-query';
+@use '../utility/variables/spacing';
+@use '../utility/variables/font-sizes';
+@use 'sass:list';
+
+@custom-selector :--heading h1, h2, h3, h4, h5, h6;
+
+:--heading,
+p {
+	margin-block: 0;
+}
+:--heading {
+	line-height: 1.03;
+}
+h1 {
+	font-size: clamp(5.3rem, 8vw, 14.5rem);
+	letter-spacing: -4.10319px;
+	line-height: .95;
+	margin-block-end: 2rem;
+}
+h2 {
+	font-size: 4.5rem;
+	letter-spacing: -0.217059px;
+	@include media-query.up(md) {
+		font-size: 9.5rem;
+		letter-spacing: -0.458235px;
+	}
+}
+h3 {
+	font-size: 4rem;
+	@include media-query.up(md) {
+		font-size: 6.4rem;
+	}
+}
+h4 {
+	font-size: 3.4rem;
+	letter-spacing: -0.164px;
+}
+p {
+	& + & {
+		margin-top: var(--spacing-md);
+	}
+}
