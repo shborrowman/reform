@@ -10,7 +10,7 @@
 		"browsersync": "browser-sync start --reload-debounce 100 --server './build' --files './build' --no-notify",
 		"build:dev": "webpack --config ./internals/webpack.dev.js",
 		"build:prod": "webpack --config ./internals/webpack.prod.js",
-		"prod": "run-p build:prod build:twigProd",
+		"prod": "run-p build:prod",
 		"start": "run-p browsersync build:dev"
 	},
 	"devDependencies": {
